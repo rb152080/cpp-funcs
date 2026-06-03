@@ -4,6 +4,7 @@ creating malloc in c++, inspired by [salar's video](https://www.youtube.com/watc
 
 leftoff 15:46
 
-this is how i allocate a new block:
+![split_available_block().png](./excalidraw/split_available_block().png)
 
-![block_diagram.png](./block_diagram.png)
+![block.png](./excalidraw/block.png)
+
