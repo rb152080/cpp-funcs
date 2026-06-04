@@ -2,7 +2,7 @@
 #include <iostream>
 #include <new>
 
-class UDT {
+class UDT { // user defined type
 public:
   UDT() { std::cout << "hello from constructor\n"; }
   ~UDT() { std::cout << "hello from destructor\n"; };
@@ -11,7 +11,7 @@ public:
 void *my_new_void(size_t size) {
   std::cout << "allocating memory (" << size << " byte(s))\n";
   void *ptr = std::malloc(size); // malloc returns void pointer
-  // TODO: find a way to return a strongly typed pointer
+  // TODO: find a way to return a strongly typed pointer (use templates)
   if (!ptr) {
     throw std::bad_alloc();
   }
