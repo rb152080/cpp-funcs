@@ -11,8 +11,8 @@ template <typename T> class MyVector {
     T *MyVectorBegin_;
     T *MyVectorEnd_;
     T *MyVectorCapacity_;
-    void grow() { // you have to use new and delete
-        size_t new_capacity{};
+    void grow() {              // you have to use new and delete
+        size_t new_capacity{}; // value initialization
         if (get_capacity() == 0) {
             new_capacity = 1;
         } else {
@@ -20,6 +20,7 @@ template <typename T> class MyVector {
             // msvc (windows) does x1.5
             new_capacity = get_capacity() * 2;
         }
+        // basically realloc
         T *new_vector = new T[new_capacity]; // reserves on the heap
         for (size_t i = 0; i < get_size(); i++) {
             new_vector[i] = MyVectorBegin_[i];
@@ -32,17 +33,36 @@ template <typename T> class MyVector {
         MyVectorEnd_ = new_vector + vector_size;
         MyVectorCapacity_ = new_vector + new_capacity;
     }
+    void check_index(size_t index) const {
+        if (index >= get_size()) { // don't need to check < 0, unsigned
+            throw std::out_of_range(
+                std::format("index {} must be in bounds\n", index));
+        }
+    }
 
   public:
     MyVector() : MyVectorBegin_{}, MyVectorEnd_{}, MyVectorCapacity_{} {}
     ~MyVector() { delete[] MyVectorBegin_; }
-    T &get_element_at(size_t index) const {
-        if (index >= get_size()) {
-            throw std::logic_error(
-                std::format("index {} must be in bounds\n", index));
-        }
+    MyVector(const MyVector &other) {}
+    MyVector &operator=(const MyVector &other) {
+        if (this == &other)
+            return *this;
+        delete MyVectorBegin_;
+
+        return *this;
+    }
+    T &get_element_at(size_t index) {
+        check_index(index);
         return *(MyVectorBegin_ + index);
     }
+    const T &get_element_at(size_t index) const {
+        check_index(index);
+        return *(MyVectorBegin_ + index);
+    }
+    T &get_first_element() { return *(MyVectorBegin_); }
+    const T &get_first_element() const { return *(MyVectorBegin_); }
+    T &get_last_element() { return *(MyVectorEnd_ - 1); }
+    const T &get_last_element() const { return *(MyVectorEnd_ - 1); }
     size_t get_size() const { return MyVectorEnd_ - MyVectorBegin_; }
     size_t get_capacity() const { return MyVectorCapacity_ - MyVectorBegin_; }
     void push_back(T element) {
@@ -58,9 +78,11 @@ template <typename T> class MyVector {
     void print_vector() const {
         std::cout << "{ ";
         for (size_t i = 0; i < get_size(); i++) {
-            std::cout << get_element_at(i) << ", ";
+            if (i == get_size() - 1)
+                std::cout << get_element_at(i) << " }\n";
+            else
+                std::cout << get_element_at(i) << ", ";
         }
-        std::cout << "}\n";
     }
 };
 
