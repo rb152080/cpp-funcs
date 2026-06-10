@@ -19,8 +19,8 @@ class Heap
     // this array represents the heap; type raw bytes
     alignas(std::max_align_t) std::array<std::byte, HEAP_SIZE> heap_{};
 
-    struct Block // 24 bytes
-    // struct alignas(std::max_align_t) Block // 32 bytes
+    // struct Block // 24 bytes
+    struct alignas(std::max_align_t) Block // 32 bytes
     {
         bool available_{true}; // brace initialization (c++11)
         size_t size_{};        // size_t is unsigned, ssize_t is signed
@@ -179,14 +179,14 @@ int main()
     heap.print(); // block 1: unavailable, 34 bytes
                   // block 2: unavailable, 44 bytes
                   // block 3: available, 1 mb - 30 bytes
-    std::cout << 1048576 - 24 - 48 - 16 - 32 << "\n";
+    std::cout << 1048576 - 32 - 32 * 2 - 16 - 32 << "\n";
     heap.deallocate(ptr1);
     heap.deallocate(ptr2);
     heap.print();
-    std::cout << 1048576 - 24 << "\n";
+    std::cout << 1048576 - 32 << "\n";
     void *ptr3{heap.allocate(30)};
     heap.print();
-    std::cout << 1048576 - 24 - 24 - 32 << "\n";
+    std::cout << 1048576 - 32 - 32 - 32 << "\n";
     heap.deallocate(ptr3);
     return 0;
 }
