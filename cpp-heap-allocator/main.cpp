@@ -9,8 +9,10 @@ constexpr std::size_t HEAP_SIZE{1024 * 1024}; // 1 mb/1048576 bytes
 
 // aligning in memory so that all data types can be aligned properly; starts at
 // a memory address that is a multiple of std::max_align_t
+// this array represents the heap (simulation)
 alignas(std::max_align_t) std::array<std::byte, HEAP_SIZE> heap{};
 
+// 24 bytes
 struct Block {
   bool available_{true}; // brace initialization (c++11)
   size_t size_{};        // size_t is unsigned, ssize_t is signed
@@ -125,7 +127,7 @@ void print_heap() {
 }
 
 int main() {
-  // std::cout << sizeof(Block) << "\n";
+  std::cout << "sizeof(Block): " << sizeof(Block) << "\n";
   print_heap();
   void *ptr1{allocate(10)};
   void *ptr2{allocate(20)};
