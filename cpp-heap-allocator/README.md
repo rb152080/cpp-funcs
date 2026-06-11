@@ -19,10 +19,12 @@ cmake --build build
 
 ## Potential Future Improvements
 
-- make it a class (oop)
+- add attribute to block with field: memory address
 - add multithreading, mutex
 - give each cpu its own space to allocate
 
 ## Limitations
+
+- I decided against implementing it using classes/ OOP because there's no need to implement the rule of 5.
 
 - Allocation happens in $O(N)$ time. We could make it happen in $O(1)$ time if we use a method called binning/ bucketing.

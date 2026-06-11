@@ -3,8 +3,6 @@
 #include <iostream>
 #include <print>
 
-// decided against using classes/ oop because no need to implement the rule of 5
-
 // evaluated at compile time instead of run time
 // this is the actual heap
 constexpr std::size_t HEAP_SIZE{1024 * 1024}; // 1 mb/1048576 bytes
