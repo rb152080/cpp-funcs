@@ -1,3 +1,3 @@
 # cpp-funcs
 
-my implementation of built in c++ functions
+my implementation of C++ functions
