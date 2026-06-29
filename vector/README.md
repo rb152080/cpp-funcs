@@ -1,3 +1,3 @@
 # vector
 
-- my implementation of `std::vector` from C++
+my implementation of `std::vector` from C++

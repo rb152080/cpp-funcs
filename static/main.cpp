@@ -1,6 +1,7 @@
 #include <iostream>
 
-void foo() {
+void foo()
+{
     // static doesn't live in the stack or heap; it is with the executable
     // static variable gets defined once during runtime in the function foo and
     // lives in that function only
@@ -9,7 +10,8 @@ void foo() {
     std::cout << s_variable << "\n";
 }
 
-int main() {
+int main()
+{
     for (int i = 0; i < 10; i++)
         foo();
     // s_variable = 10; // can't do this
