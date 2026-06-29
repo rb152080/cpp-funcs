@@ -16,7 +16,7 @@ class UDT
 };
 
 void* operator new(size_t size)
-// behaves like malloc; returns a void*, can't return a typed ptr
+// behaves more like malloc; returns a void*, can't return a typed ptr
 {
     void* ptr = std::malloc(size);
     if (ptr == nullptr)
