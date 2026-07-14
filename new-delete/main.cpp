@@ -54,7 +54,7 @@ void dealloc(T* ptr)
 int main()
 {
     std::cout << "sizeof(UDT): " << sizeof(UDT) << "\n";
-    UDT* ptr = alloc<UDT>(); // this more like standard malloc
+    UDT* ptr = alloc<UDT>();
     dealloc(ptr);
     int* int_ptr = alloc<int>();
     dealloc(int_ptr);
