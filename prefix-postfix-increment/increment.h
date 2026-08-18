@@ -24,7 +24,7 @@ class Increment
     Increment operator++(int)
     {
         Increment temp = *this;
-        value_ += increment_;
+        ++(*this); // calls the above function
         return temp;
     }
 
